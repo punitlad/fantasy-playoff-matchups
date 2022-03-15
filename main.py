@@ -8,6 +8,6 @@ parser.add_argument("away_team", help="home team", type=str)
 
 args = parser.parse_args()
 
-print()
-AvgVs().call(args.home_team, args.away_team)
-WeekVs().call(args.home_team, args.away_team)
+print('')
+AvgVs(args.home_team, args.away_team).output()
+WeekVs(args.home_team, args.away_team).output()
