@@ -3,34 +3,39 @@ import json
 
 class AvgVs:
     def __init__(self, home, away):
+        self.home_name = home
+        self.away_name = away
         f = open('data/03.13.2022-all-data.json')
         self.data = json.load(f)
         f.close()
 
-        self.home = list(filter(lambda x: x['id'] == home, self.data['teams']))[0]
-        self.away = list(filter(lambda x: x['id'] == away, self.data['teams']))[0]
+        self.home_data = list(filter(lambda x: x['id'] == self.home_name, self.data['teams']))[0]
+        self.away_data = list(filter(lambda x: x['id'] == self.away_name, self.data['teams']))[0]
+
+    def render_string_by_value(self, value_1, value_2): 
+        if value_1 > value_2:
+            return str(value_1) + '\t'
+        else: 
+            return str(value_1) + '\t'
 
     def output(self):
         total_matchups = 20
 
         print("\tTeam\tFG%\tFT%\t3PM\tREB\tAST\tSTL\tBLK\tPTS")
+        home_averages_as_string = '\t' + self.home_name + '\t'
+        away_averages_as_string = '\t' + self.away_name + '\t'
 
-        for team in (self.home, self.away):
-            team_name = team['id']
-            team_averages_as_string = '\t' + team_name + '\t'
-            team_avg_stats = []
-            for stat in team['statistics']:
-                stat_type = stat['type']
-                if stat_type == 'fg%' or stat_type == 'ft%':
-                    team_avg_stats.append(stat)
-                    team_averages_as_string = team_averages_as_string + \
-                        str(stat['value']) + '\t'
-                else:
-                    average = stat['value'] / total_matchups
-                    team_averages_as_string = team_averages_as_string + \
-                        str(average) + '\t'
-                    team_avg_stats.append(
-                        {'type': stat_type, 'value': average})
+        for category in ("fg%", "ft%", "3pm", "reb", "ast", "stl", "blk", "pts"):
+            home_category = list(filter(lambda x: x['type'] == category, self.home_data['statistics']))[0]
+            away_category = list(filter(lambda x: x['type'] == category, self.away_data['statistics']))[0]
 
-            print(team_averages_as_string)
+            if category == 'fg%' or category == 'ft%':
+                home_averages_as_string = home_averages_as_string + self.render_string_by_value(home_category['value'], away_category['value'])
+                away_averages_as_string = away_averages_as_string + self.render_string_by_value(away_category['value'], home_category['value'])
+            else: 
+                home_averages_as_string = home_averages_as_string + self.render_string_by_value(home_category['value'] / total_matchups, away_category['value'] / total_matchups)
+                away_averages_as_string = away_averages_as_string + self.render_string_by_value(away_category['value'] / total_matchups, home_category['value'] / total_matchups)
+        
+        print(home_averages_as_string)
+        print(away_averages_as_string)
         print('')
