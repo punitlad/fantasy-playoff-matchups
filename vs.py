@@ -14,7 +14,7 @@ class AvgVs:
 
     def render_string_by_value(self, value_1, value_2): 
         if value_1 > value_2:
-            return str(value_1) + '\t'
+            return "\033[92m" + str(value_1) + "\033[0m" + '\t'
         else: 
             return str(value_1) + '\t'
 
