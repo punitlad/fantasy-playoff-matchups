@@ -6,7 +6,7 @@ class TeamOverallVs:
     def __init__(self, home, away):
         self.home_name = home
         self.away_name = away
-        f = open('data/03.13.2022-all-data.json')
+        f = open('data/03.14.2022-all-data.json')
         self.data = json.load(f)
         f.close()
 
