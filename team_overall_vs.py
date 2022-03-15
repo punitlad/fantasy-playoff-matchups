@@ -1,4 +1,5 @@
 import json
+from art import *
 
 
 class TeamOverallVs:
@@ -13,6 +14,8 @@ class TeamOverallVs:
         self.away_record = list(filter(lambda x: x['id'] == self.away_name, self.data['teams']))[0]['record']
 
     def output(self):
-        print("\t\t\t\t" + self.home_name + "\tVS\t" + self.away_name + "\t\t")
-        print("\t\t\t\t" + self.home_record + "\t" + self.away_record + "\t\t")
+        vs_text = "\t" + self.home_name + " vs " + self.away_name
+        print(text2art(vs_text,font='colossal'))
+        print("\t\t\t\t" + self.home_name + "\tvs\t" + self.away_name)
+        print("\t\t\t\t" + self.home_record + "\t\t" + self.away_record)
         print('')

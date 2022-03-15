@@ -5,7 +5,7 @@ class AvgVs:
     def __init__(self, home, away):
         self.home_name = home
         self.away_name = away
-        f = open('data/03.13.2022-all-data.json')
+        f = open('data/03.14.2022-all-data.json')
         self.data = json.load(f)
         f.close()
 
@@ -14,16 +14,16 @@ class AvgVs:
 
     def render_string_by_value(self, value_1, value_2): 
         if value_1 > value_2:
-            return "\033[92m" + str(value_1) + "\033[0m" + '\t'
+            return "\033[1m\033[32m" + str(value_1) + "\033[0m" + '\t'
         else: 
             return str(value_1) + '\t'
 
     def output(self):
         total_matchups = 20
 
-        print("\tAvg\tFG%\tFT%\t3PM\tREB\tAST\tSTL\tBLK\tPTS")
-        home_averages_as_string = '\t' + self.home_name + '\t'
-        away_averages_as_string = '\t' + self.away_name + '\t'
+        print("\tTeam\tFG%\tFT%\t3PM\tREB\tAST\tSTL\tBLK\tPTS")
+        home_averages_as_string = 'Avg\t' + self.home_name + '\t'
+        away_averages_as_string = 'Avg\t' + self.away_name + '\t'
 
         for category in ("fg%", "ft%", "3pm", "reb", "ast", "stl", "blk", "pts"):
             home_category = list(filter(lambda x: x['type'] == category, self.home_data['statistics']))[0]

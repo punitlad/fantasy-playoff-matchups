@@ -21,7 +21,7 @@ class WeekVs:
 
     def render_string_by_value(self, value_1, value_2): 
         if value_1 > value_2:
-            return "\033[92m" + str(value_1) + "\033[0m" + '\t'
+            return "\033[1m\033[32m" + str(value_1) + "\033[0m" + '\t'
         else: 
             return str(value_1) + '\t'
 

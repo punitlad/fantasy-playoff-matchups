@@ -11,5 +11,8 @@ args = parser.parse_args()
 
 print('')
 TeamOverallVs(args.home_team, args.away_team).output()
+print("Weekly Averages\n=============================================================================================")
 AvgVs(args.home_team, args.away_team).output()
+
+print("Week By Week Comparison\n=============================================================================================")
 WeekVs(args.home_team, args.away_team).output()
