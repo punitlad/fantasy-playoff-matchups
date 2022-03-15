@@ -21,7 +21,7 @@ class AvgVs:
     def output(self):
         total_matchups = 20
 
-        print("\tTeam\tFG%\tFT%\t3PM\tREB\tAST\tSTL\tBLK\tPTS")
+        print("\tAvg\tFG%\tFT%\t3PM\tREB\tAST\tSTL\tBLK\tPTS")
         home_averages_as_string = '\t' + self.home_name + '\t'
         away_averages_as_string = '\t' + self.away_name + '\t'
 
